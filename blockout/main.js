@@ -73,6 +73,11 @@ phina.define("TitleScene", {
 
     this.addCircle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 
+    var c = Circle({
+      x:100,
+      y:100,
+    }).addChildTo(this);
+
     // ラベル
     Label({
       text: 'BLOCKOUT',
@@ -104,10 +109,6 @@ phina.define("TitleScene", {
       }).addChildTo(this);
     },
 
-    nextscene: function(){
-      
-    },
-
   // タッチで次のシーンへ
   onpointstart: function() {
     this.exit();
@@ -133,29 +134,24 @@ phina.define("GameScene", {
       fill: 'white',
     }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
 
-    // Shapeを作成してシーンに追加
-      var shape = Shape({
-        // 位置・幅・高さ指定
-        x: SCREEN_WIDTH / 2,
-        y: 440,
-        width: BAR_WIDTH,
-        height: BAR_HEIGHT,
-      }).addChildTo(this);
-  
-      var circleshape = CircleShape({
-        x:shape.x,
-        y:shape.y - 50,
-        radius: 10,
-        fill:"white",
-        stroke:"blue",
-        
-      }).addChildTo(this);
-
   },
   // タッチで次のシーンへ
   onpointstart: function() {
-    this.exit();  
+    //this.exit();  
   },
+      // タッチ保持イベント
+  onpointstay: function(e) {
+        // スプライトをタッチ位置に
+              
+        //circleshape.x = e.pointer.x;
+        //sprite.y = e.pointer.y;
+      },
+      // タッチ移動イベント
+    onpointmove:function(e) {
+        // スプライトをタッチ位置に
+        //circleshape.x = e.pointer.x;
+        //sprite.y = e.pointer.y;
+      },
 });
 /*
  * メイン処理
@@ -172,7 +168,6 @@ phina.main(function() {
         label: 'TitleScene',
         nextLabel: 'GameScene',
       },
-
       {
         className: 'GameScene',
         label: 'GameScene',
